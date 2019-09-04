@@ -30609,21 +30609,234 @@ if ("development" === 'production') {
 } else {
   module.exports = require('./cjs/react-dom.development.js');
 }
-},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"index.js":[function(require,module,exports) {
+},{"./cjs/react-dom.development.js":"node_modules/react-dom/cjs/react-dom.development.js"}],"components/LinkCard.js":[function(require,module,exports) {
 "use strict";
 
-var _react = _interopRequireDefault(require("react"));
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+
+var _react = _interopRequireWildcard(require("react"));
+
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+var LinkCard = function LinkCard(props) {
+  var linkImageStyle = {
+    backgroundImage: 'url(\'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png\')'
+  };
+  var mappedData = props.cards.map(function (card, i) {
+    return _react.default.createElement("div", {
+      key: i,
+      className: "linkCard"
+    }, _react.default.createElement("div", {
+      className: "linkCardImage",
+      style: linkImageStyle
+    }), _react.default.createElement("div", {
+      className: "linkCardLink"
+    }, _react.default.createElement("h2", null, _react.default.createElement("a", {
+      href: card.linkHref
+    }, card.linkName))));
+  });
+  return _react.default.createElement(_react.Fragment, null, mappedData);
+};
+
+var _default = LinkCard;
+exports.default = _default;
+},{"react":"node_modules/react/index.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"main.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+"use strict";
+
+var _react = _interopRequireWildcard(require("react"));
 
 var _reactDom = _interopRequireDefault(require("react-dom"));
 
+var _LinkCard = _interopRequireDefault(require("./components/LinkCard"));
+
+require("./main.css");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj; } else { var newObj = {}; if (obj != null) { for (var key in obj) { if (Object.prototype.hasOwnProperty.call(obj, key)) { var desc = Object.defineProperty && Object.getOwnPropertyDescriptor ? Object.getOwnPropertyDescriptor(obj, key) : {}; if (desc.get || desc.set) { Object.defineProperty(newObj, key, desc); } else { newObj[key] = obj[key]; } } } } newObj.default = obj; return newObj; } }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(source, true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(source).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance"); }
+
+function _iterableToArray(iter) { if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) { for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) { arr2[i] = arr[i]; } return arr2; } }
+
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance"); }
+
+function _iterableToArrayLimit(arr, i) { var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 var App = function App() {
-  return _react.default.createElement("div", null, _react.default.createElement("h1", null, "Hello world"));
+  var _useState = (0, _react.useState)([{
+    linkName: 'my link',
+    linkHref: 'https://github.com'
+  }]),
+      _useState2 = _slicedToArray(_useState, 2),
+      cardData = _useState2[0],
+      setCardData = _useState2[1];
+
+  var _useState3 = (0, _react.useState)({
+    linkName: '',
+    linkHref: ''
+  }),
+      _useState4 = _slicedToArray(_useState3, 2),
+      newCard = _useState4[0],
+      setNewCard = _useState4[1];
+
+  var dispatchCardSet = function dispatchCardSet(payload) {
+    var oldArray = cardData;
+    var newArray = [].concat(_toConsumableArray(oldArray), [payload]);
+    setCardData(newArray);
+    setNewCard({
+      linkHref: '',
+      linkName: ''
+    });
+  };
+
+  return _react.default.createElement(_react.Fragment, null, _react.default.createElement("nav", {
+    className: "navigation"
+  }, _react.default.createElement("a", null, _react.default.createElement("img", {
+    height: "40px",
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+  })), _react.default.createElement("ul", null, _react.default.createElement("li", null, "Home"))), _react.default.createElement("main", null, _react.default.createElement("div", {
+    className: "leftContent"
+  }, _react.default.createElement("img", {
+    src: "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a7/React-icon.svg/1200px-React-icon.svg.png"
+  }), _react.default.createElement("form", {
+    onSubmit: function onSubmit(e) {
+      return e.preventDefault();
+    }
+  }, _react.default.createElement("h2", {
+    className: "formTitle"
+  }, "Add a bookmark"), _react.default.createElement("div", null, _react.default.createElement("label", {
+    htmlFor: "linkTitle",
+    className: "formLabel"
+  }, "Enter a bookmark name"), _react.default.createElement("input", {
+    value: newCard.linkName,
+    onChange: function onChange(e) {
+      return setNewCard(_objectSpread({}, newCard, {
+        linkName: e.currentTarget.value
+      }));
+    },
+    type: "text",
+    name: "linkTitle",
+    minLength: "1",
+    maxLength: "25",
+    placeholder: "25 characters max"
+  })), _react.default.createElement("div", null, _react.default.createElement("label", {
+    htmlFor: "linkHref",
+    className: "formLabel"
+  }, "Enter a bookmark name"), _react.default.createElement("input", {
+    value: newCard.linkHref,
+    onChange: function onChange(e) {
+      return setNewCard(_objectSpread({}, newCard, {
+        linkHref: e.currentTarget.value
+      }));
+    },
+    type: "text",
+    name: "linkTitle",
+    minLength: "7",
+    maxLength: "40",
+    placeholder: "https://example.com"
+  })), _react.default.createElement("button", {
+    onClick: function onClick() {
+      return dispatchCardSet(newCard);
+    }
+  }, "Add"))), _react.default.createElement("div", {
+    className: "rightContent"
+  }, _react.default.createElement(_LinkCard.default, {
+    cards: cardData
+  }))));
 };
 
 _reactDom.default.render(_react.default.createElement(App, null), document.getElementById('app'));
-},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"react":"node_modules/react/index.js","react-dom":"node_modules/react-dom/index.js","./components/LinkCard":"components/LinkCard.js","./main.css":"main.css"}],"../../../../../AppData/Roaming/npm/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -30651,7 +30864,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61112" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55240" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
